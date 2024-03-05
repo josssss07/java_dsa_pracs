@@ -1,45 +1,42 @@
-
-
 import java.util.Scanner;
 
-public class DynamicInsert {
+ class DynamicSort {
+    // Function to perform the Bubble Sort algorithm on an array
+    static void bubbleSort1(int[] arr1, int m) {
+        int temp = 0;
+        // Nested loops to compare and swap elements for sorting
+        for (int i = 0; i < m; i++) {
+            for (int j = 1; j < (m - i); j++) {
+                if (arr1[j - 1] > arr1[j]) {
+                    // Swap elements if they are in the wrong order
+                    temp = arr1[j - 1];
+                    arr1[j - 1] = arr1[j];
+                    arr1[j] = temp;
+                }
+            }
+        }
+    }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Dynamically sorting while inserting elements:\n");
+        System.out.println("-------OTHER SORT--------");
+        System.out.println("Enter the length of the array and then the array elements: ");
+        int m = sc.nextInt();
+        int arr1[] = new int[m];
 
-        System.out.println("Enter the number of elements: ");
-        int numElements = sc.nextInt();
+        // Populate the array and sort dynamically after each input
+        for (int i = 0; i < m; i++) {
+            arr1[i] = sc.nextInt();
+            bubbleSort1(arr1, i + 1);
 
-        int[] data = new int[numElements];
-
-        for (int i = 0; i < numElements; i++) {
-            System.out.println("Enter element " + (i + 1) + ": ");
-            int element = sc.nextInt();
-
-            // Insert the new element and sort the array
-            insertAndSort(data, i, element);
-
-            // Print the sorted array after insertion
-            System.out.print("Sorted array: ");
-            for (int j = 0; j <= i; j++) {
-                System.out.print(data[j] + " ");
+            // Display the sorted array after each input
+            System.out.println("Sorted array after " + (i + 1) + "th element is entered: ");
+            for (int j = 0; j < m; j++) {
+                System.out.print(arr1[j] + " ");
             }
             System.out.println();
         }
 
-        sc.close();
-    }
-
-    static void insertAndSort(int[] arr, int n, int element) {
-        // Shift elements to make space for the new element
-        if (n != 0) {
-            for (int i = n - 1; i >= 0 && arr[i] > element; i--) {
-                arr[i + 1] = arr[i];
-            }
-        }
-
-        // Insert the new element at its correct position
-        arr[n] = element;
+        System.out.println("Array is sorted.");
     }
 }
