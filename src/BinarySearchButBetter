@@ -77,7 +77,6 @@ public class BinarySearchTree {
 
     }
     public void remove(int data){
-        if(search(data)){
             removeHelper(root, data);
         }else {
             System.out.println("no data");
@@ -105,7 +104,7 @@ public class BinarySearchTree {
         return root;
     }
     private int successor(Node root){
-            root =root.right;
+            root = root.right;
             while (root.left != null){
                 root = root.left;
             }
@@ -135,4 +134,161 @@ class MainTwo{
         tree.remove(0);
     }
 
+}
+************************************************************************************************
+
+// Node class for creating nodes in a binary search tree
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    // Getter and Setter methods for the Node class
+    public int getData() {
+        return data;
+    }
+
+    public void setData(int data) {
+        this.data = data;
+    }
+
+    public Node getLeft() {
+        return left;
+    }
+
+    public void setLeft(Node left) {
+        this.left = left;
+    }
+
+    public Node getRight() {
+        return right;
+    }
+
+    public void setRight(Node right) {
+        this.right = right;
+    }
+
+    // Constructor for creating a new Node with given data
+    public Node(int data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+// BinarySearchDemo class for demonstrating binary search tree operations
+public class BinarySearchDemo {
+    public Node root;
+
+    // Constructor for creating an instance of BinarySearchDemo with an initially empty tree
+    public BinarySearchDemo() {
+        root = null;
+    }
+
+    // Method to insert a new node with the given data into the binary search tree
+    public void insert(int data) {
+        Node newNode = new Node(data);
+        if (root == null) {
+            root = newNode;
+            return;
+        } else {
+            Node current = root, parent = null;
+            while (true) {
+                parent = current;
+                if (data < current.data) {
+                    current = current.getLeft();
+                    if (current == null) {
+                        parent.left = newNode;
+                        return;
+                    }
+                } else {
+                    current = current.right;
+                    if (current == null) {
+                        parent.right = newNode;
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    // Method to find the node with the minimum value in a given subtree
+    public Node minNode(Node root) {
+        if (root.left != null)
+            return minNode(root.left);
+        else
+            return root;
+    }
+
+    // Method to delete a node with a specific value from the binary search tree
+    public Node deleteNode(Node node, int value) {
+        if (node == null) {
+            return null;
+        } else {
+            if (value < node.data) {
+                node.left = deleteNode(node.left, value);
+            } else if (value > node.data) {
+                node.right = deleteNode(node.right, value);
+            } else {
+                if (node.left == null && node.right == null) {
+                    node = null;
+                } else if (node.left == null) {
+                    node = node.right;
+                } else if (node.right == null) {
+                    node = node.left;
+                } else {
+                    Node temp = minNode(node.right);
+                    node.data = temp.data;
+                    node.right = deleteNode(node.right, temp.data);
+                }
+            }
+            return node;
+        }
+    }
+
+    // Method to perform inorder traversal of the binary search tree
+    public void inorderTraversal(Node node) {
+        if (root == null) {
+            System.out.println("Tree is empty");
+            return;
+        } else {
+            if (node.left != null)
+                inorderTraversal(node.left);
+            System.out.print(node.data + " ");
+            if (node.right != null)
+                inorderTraversal(node.right);
+        }
+    }
+
+    // Main method for testing the binary search tree operations
+    public static void main(String[] args) {
+        // Creating an instance of BinarySearchDemo
+        BinarySearchDemo bt = new BinarySearchDemo();
+
+        // Inserting nodes into the binary search tree
+        bt.insert(50);
+        bt.insert(30);
+        bt.insert(70);
+        bt.insert(60);
+        bt.insert(10);
+        bt.insert(90);
+
+        System.out.println("Binary search tree after insertion: ");
+        // Performing inorder traversal to display the tree
+        bt.inorderTraversal(bt.root);
+
+        // Deleting nodes from the binary search tree
+        Node deletedNode = null;
+        deletedNode = bt.deleteNode(bt.root, 90);
+        System.out.println("\nBinary search tree after deleting node 90: ");
+        bt.inorderTraversal(bt.root);
+
+        deletedNode = bt.deleteNode(bt.root, 30);
+        System.out.println("\nBinary search tree after deleting node 30: ");
+        bt.inorderTraversal(bt.root);
+
+        deletedNode = bt.deleteNode(bt.root, 50);
+        System.out.println("\nBinary search tree after deleting node 50: ");
+        bt.inorderTraversal(bt.root);
+    }
 }
