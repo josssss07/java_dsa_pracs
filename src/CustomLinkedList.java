@@ -1,4 +1,5 @@
 //prac3
+
 public class CustomLinkedList {
     int data;
 

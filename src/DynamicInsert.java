@@ -1,42 +1,46 @@
 import java.util.Scanner;
 
- class DynamicSort {
-    // Function to perform the Bubble Sort algorithm on an array
-    static void bubbleSort1(int[] arr1, int m) {
-        int temp = 0;
-        // Nested loops to compare and swap elements for sorting
-        for (int i = 0; i < m; i++) {
-            for (int j = 1; j < (m - i); j++) {
-                if (arr1[j - 1] > arr1[j]) {
-                    // Swap elements if they are in the wrong order
-                    temp = arr1[j - 1];
-                    arr1[j - 1] = arr1[j];
-                    arr1[j] = temp;
-                }
-            }
-        }
+public class Main {
+
+  public static void main(String[] args) {
+    int size;
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Enter the number of elements: ");
+    size = sc.nextInt();
+    int[] arr = new int[size];
+    for (int i = 0; i < size; i++) {
+      System.out.println("Enter element " + i + ": ");
+      new Main().dynamicSort(i, arr, sc.nextInt());
     }
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("-------OTHER SORT--------");
-        System.out.println("Enter the length of the array and then the array elements: ");
-        int m = sc.nextInt();
-        int arr1[] = new int[m];
-
-        // Populate the array and sort dynamically after each input
-        for (int i = 0; i < m; i++) {
-            arr1[i] = sc.nextInt();
-            bubbleSort1(arr1, i + 1);
-
-            // Display the sorted array after each input
-            System.out.println("Sorted array after " + (i + 1) + "th element is entered: ");
-            for (int j = 0; j < m; j++) {
-                System.out.print(arr1[j] + " ");
-            }
-            System.out.println();
-        }
-
-        System.out.println("Array is sorted.");
+    System.out.println();
+    for (int a : arr) {
+      System.out.println(a);
     }
+  }
+
+  void dynamicSort(int i, int[] arr, int elem) {
+    if (i < 1) {
+      arr[0] = elem;
+      return;
+    }
+    boolean replace = false;
+    int temp = 0;
+    int temp2;
+    for (int j = 0; j < i + 1; j++) {
+      if (!replace) {
+        if (arr[j] > elem) {
+          replace = true;
+          temp = arr[j];
+          arr[j] = elem;
+        }
+      } else {
+        temp2 = arr[j];
+        arr[j] = temp;
+        temp = temp2;
+      }
+    }
+    if (!replace) {
+      arr[i] = elem;
+    }
+  }
 }
