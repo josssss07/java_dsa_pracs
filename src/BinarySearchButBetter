@@ -51,21 +51,6 @@ public class BinarySearchTree {
         return root;
     }
 
-//    int data = node.data;
-//
-//		if(root == null) {
-//        root = node;
-//        return root;
-//    }
-//		else if(data < root.data) {
-//        root.left = insertHelper(root.left, node);
-//    }
-//		else {
-//        root.right = insertHelper(root.right, node);
-//    }
-//
-//		return root;
-
     public void display(){
         displayHelper(root);
     }
