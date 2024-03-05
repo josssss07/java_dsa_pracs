@@ -1,6 +1,5 @@
-
 // Node class for creating nodes in a binary search tree
-class Node {
+class NodeTwo {
     int data;
     NodeTwo left;
     NodeTwo right;
@@ -31,7 +30,7 @@ class Node {
     }
 
     // Constructor for creating a new Node with given data
-    public Node(int data) {
+    public NodeTwo(int data) {
         this.data = data;
         this.left = null;
         this.right = null;
@@ -39,11 +38,11 @@ class Node {
 }
 
 // BinarySearchDemo class for demonstrating binary search tree operations
- class BinarySearchDemo {
+ class BinarySearchDemoOne {
     public NodeTwo root;
 
     // Constructor for creating an instance of BinarySearchDemo with an initially empty tree
-    public BinarySearchDemo() {
+    public BinarySearchDemoOne() {
         root = null;
     }
 
